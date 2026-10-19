@@ -23,6 +23,9 @@ public class Animal {
     this.pesoKg=pesoKg;
     this.consumoKg=consumoKg;
     }
+    public Animal (){
+        
+    }
 
     //Metodos
 
