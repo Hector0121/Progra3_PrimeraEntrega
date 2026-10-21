@@ -21,6 +21,35 @@ public class Refugio {
 
     }
     //Metodos
+    
+
+    
+
+    public float coste_diario_x_animal(int pos){
+        Animal animalActual =this.animales[pos];
+        float coste = animalActual.getConsumoKg() * this.price_alimentoKg;
+        return coste;
+    }
+
+    public float coste_diario_total(){
+        float coste =0;
+        for(int i=0;i<this.num_animals;i++){
+            Animal animalActual = this.animales[i];
+            coste += animalActual.getConsumoKg() * this.price_alimentoKg;
+        }
+        return coste;
+    }
+    public float pesoMedio(){
+        float peso_total =0;
+        for(int i =0 ;i<this.num_animals;i++){
+            Animal animalActual = this.animales[i];
+            peso_total +=animalActual.getPesoKg();
+        }
+
+
+        return (peso_total/this.num_animals);
+    }
+
     public void crearRegistro( int capacidad) {
         this.animales = new Animal[capacidad];
     }

@@ -7,7 +7,7 @@ public class Menu {
        Scanner sc = new Scanner (System.in);
        //Clases
        Refugio refugio = new Refugio();
-       Cuidador cuidador = new Cuidador();
+       Cuidador cuidador = new Cuidador()
        Animal animal = new Animal();
 
 
@@ -82,6 +82,8 @@ public class Menu {
                         System.out.println("|===========================|");
                         System.out.print("\nNombre del cuidador: ");
                         String nombre_cuidador = sc.nextLine();
+                        System.out.print("\nNombre del cuidador: ");
+                        String nombre_cuidador = sc.nextLine();
                         System.out.print("\nNombre del animal: ");
                         String nombre_animal = sc.nextLine();
                         System.out.print("\nNombre de la especie: ");
@@ -101,7 +103,20 @@ public class Menu {
                     }
                 break;
             case 4:
-                    ImprimirTabla();
+                    //resultado de las funciones
+                    System.out.printf("|-----------------------------|");
+                    System.out.printf("| ANIMALES DEL REFUGIO|");
+                    System.out.printf("|-----------------------------|");
+                    System.out.printf("| Nombre | Especie | Cuidador | Formacion | Peso(Kg) | Consumo Kg | Coste EUR | ");
+                    for(int i=0;i<refugio.getNum_animals();i++){
+                        Animal animalActual = refugio.getAnimales()[i];
+                        System.out.printf("|\n %s \t %s\t %s %s\t %b\t %.2f\t %.2f\\t %.2f\t\n|",animalActual.getNomb_animal(),animalActual.getEspecie(),animalActual.getNomb_cuidador(), , , animalActual.getPesoKg(),animalActual.getConsumoKg(),refugio.getPrice_alimentoKg());
+                    }
+                    System.out.printf("|-----------------------------|");
+                    System.out.printf("|Coste diario total de alimentacion: %.2f |");
+                    System.out.printf("|Peso medio de los animales:  %.2f |");
+                    System.out.printf("|-----------------------------|");
+                    
                 break;
             case 5:
 
@@ -110,65 +125,5 @@ public class Menu {
 
         }while(opcion !=5);
     }
-
-    public  static void ImprimirTabla(){
-        System.out.printf("|-----------------------------|");
-        System.out.printf("| ANIMALES DEL REFUGIO|");
-        System.out.printf("|-----------------------------|");
-        System.out.printf("| Nombre | Especie | Cuidador | Formacion | Peso(Kg) | Consumo Kg | Coste EUR | ");
-        for(int i=0;i<numAnimls;i++){
-            System.out.printf("|\n %s \t %s\t %s\t %b\t %.2f\t %.2f\\t %.2f\t\n|");
-        }
-        System.out.printf("|-----------------------------|");
-        System.out.printf("|Coste diario total de alimentacion: %.2f |");
-        System.out.printf("|Peso medio de los animales:  %.2f |");
-        System.out.printf("|-----------------------------|");
-
-    }
-
-
-    public static float coste_diario_x_animal(){
-
-        
-
-    }
-
-   
-
-    public float coste_diario_total(float consumo){
-
-        float total=0;
-
-        for(int i=0;i<this.num_animals;i++){
-
-                total += this.price_alimentoKg *consumo;
-
-        }
-
-        return total;
-
-    }
-
-
-
-    /* 
-
-    public float precio_medio(){
-
-        float total_pesos=0;
-
-        
-
-        for(int i=0;i<this.num_animals;i++){
-
-
-
-        }
-
-        return  (total_pesos/this.num_animals);
-
-    }
-
-    */
 
 }
