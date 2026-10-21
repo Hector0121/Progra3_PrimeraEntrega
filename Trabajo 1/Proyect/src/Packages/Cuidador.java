@@ -12,6 +12,9 @@ public class Cuidador {
     this.Apellidos=Apellidos;
     this.Formacion=formacion;
    }
+   public Cuidador (){
+    
+   }
 
    public String getCuidador() {
     return Cuidador;
