@@ -49,7 +49,7 @@ public class Menu {
                     }while(refugio.getNum_animals() > refugio.TAM || refugio.getNum_animals() <= 0);
 
                     refugio.crearRegistro(refugio.getNum_animals());
-                    System.out.printf("Refugio correctamente creado, tamaño del refugio : (%d)",refugio.getNum_animals());
+                    System.out.printf("Refugio correctamente creado, tamaño del refugio : (%d)\n",refugio.getNum_animals());
 
                 break;
             case 2:
