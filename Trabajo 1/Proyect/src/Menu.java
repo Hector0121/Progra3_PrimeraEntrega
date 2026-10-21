@@ -7,8 +7,8 @@ public class Menu {
        Scanner sc = new Scanner (System.in);
        //Clases
        Refugio refugio = new Refugio();
-       Cuidador cuidador = new Cuidador()
-       Animal animal = new Animal();
+       Cuidador cuidador1 = new Cuidador("Juan","Sanchez Perez",true);
+       Cuidador cuidador2 = new Cuidador("Maria","Gutierrez Gomez",false);
 
 
        int opcion;
@@ -73,6 +73,9 @@ public class Menu {
 
                 break;
             case 3:
+                    flag=false;
+                    rep=0;
+
                     System.out.printf("\nEl número de animales ha introducir en el refugio son %d", refugio.getNum_animals());
 
                     if(refugio.getNum_animals() <refugio.getAnimales().length){
@@ -80,10 +83,20 @@ public class Menu {
                         System.out.println("|===========================|");
                         System.out.println("|   RELLENA EL FORMULARIO   |");
                         System.out.println("|===========================|");
-                        System.out.print("\nNombre del cuidador: ");
-                        String nombre_cuidador = sc.nextLine();
-                        System.out.print("\nNombre del cuidador: ");
-                        String nombre_cuidador = sc.nextLine();
+                        String nombre_cuidador;
+                        do{
+                            if(rep !=0){
+                                flag =true;
+                            }
+                            if(flag ==true){
+                                System.out.print("\nError: El cuidador no exsite");
+                                flag =false;
+                            }
+                            System.out.print("\nNombre del cuidador: ");
+                            nombre_cuidador = sc.nextLine();
+                            rep++;
+                        }while(nombre_cuidador.equalsIgnoreCase(cuidador1.getCuidador()) || nombre_cuidador.equalsIgnoreCase(cuidador2.getCuidador()));
+
                         System.out.print("\nNombre del animal: ");
                         String nombre_animal = sc.nextLine();
                         System.out.print("\nNombre de la especie: ");
@@ -110,11 +123,34 @@ public class Menu {
                     System.out.printf("| Nombre | Especie | Cuidador | Formacion | Peso(Kg) | Consumo Kg | Coste EUR | ");
                     for(int i=0;i<refugio.getNum_animals();i++){
                         Animal animalActual = refugio.getAnimales()[i];
-                        System.out.printf("|\n %s \t %s\t %s %s\t %b\t %.2f\t %.2f\\t %.2f\t\n|",animalActual.getNomb_animal(),animalActual.getEspecie(),animalActual.getNomb_cuidador(), , , animalActual.getPesoKg(),animalActual.getConsumoKg(),refugio.getPrice_alimentoKg());
+                        String apellidos;
+                        String formacion;
+                        float coste_diario_anml;
+                        if(animalActual.getNomb_cuidador().equals(cuidador1.getCuidador())){
+                            apellidos=cuidador1.getApellidos();
+                            if(cuidador1.isFormacion() == true){
+                                formacion="SI";
+                            }
+                            else{
+                                formacion ="NO";
+                            }
+                        }
+                        else{
+                            apellidos=cuidador2.getApellidos();
+                            if(cuidador2.isFormacion() == true){
+                                formacion="SI";
+                            }
+                            else{
+                                formacion ="NO";
+                            }
+                        }
+                        System.out.printf("|\n %s \t %s\t %s %s\t %s\t %.2f\t %.2f\\t %.2f\t\n|",animalActual.getNomb_animal(),animalActual.getEspecie(),animalActual.getNomb_cuidador(),animalActual.getNomb_cuidador(),apellidos,formacion, animalActual.getPesoKg(),animalActual.getConsumoKg(),coste_diario_anml=refugio.coste_diario_x_animal(i));
                     }
+                    float cost_total;
+                    float pes_med;
                     System.out.printf("|-----------------------------|");
-                    System.out.printf("|Coste diario total de alimentacion: %.2f |");
-                    System.out.printf("|Peso medio de los animales:  %.2f |");
+                    System.out.printf("|Coste diario total de alimentacion: %.2f |",cost_total=refugio.coste_diario_total());
+                    System.out.printf("|Peso medio de los animales:  %.2f |",pes_med=refugio.pesoMedio());
                     System.out.printf("|-----------------------------|");
                     
                 break;
@@ -124,6 +160,9 @@ public class Menu {
         }
 
         }while(opcion !=5);
+        System.out.println("Prgrama finalizado");
+        sc.close();
     }
+    
 
 }
