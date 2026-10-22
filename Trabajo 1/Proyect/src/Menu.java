@@ -135,6 +135,7 @@ public class Menu {
                         String apellidos;
                         String formacion;
                         float coste_diario_anml;
+                        coste_diario_anml=refugio.coste_diario_x_animal(i);
                         if(animalActual.getNomb_cuidador().equals(cuidador1.getCuidador())){
                             apellidos=cuidador1.getApellidos();
                             if(cuidador1.isFormacion() == true){
@@ -153,14 +154,21 @@ public class Menu {
                                 formacion ="NO";
                             }
                         }
-                        System.out.printf("|\n %s \t %s\t %s %s\t %s\t %.2f\t %.2f\\t %.2f\t\n|",animalActual.getNomb_animal(),animalActual.getEspecie(),animalActual.getNomb_cuidador(),animalActual.getNomb_cuidador(),apellidos,formacion, animalActual.getPesoKg(),animalActual.getConsumoKg(),coste_diario_anml=refugio.coste_diario_x_animal(i));
+                        System.out.printf("| %-6s | %-7s | %-15s | %-9s | %-8.2f | %-11.2f | %-10.2f |\n",
+                            animalActual.getNomb_animal(),
+                            animalActual.getEspecie(),
+                            animalActual.getNomb_cuidador() + " " + apellidos,
+                            formacion,
+                            animalActual.getPesoKg(),
+                            animalActual.getConsumoKg(),
+                            coste_diario_anml);
                     }
-                    float cost_total;
-                    float pes_med;
-                    System.out.printf("|-----------------------------|");
-                    System.out.printf("|Coste diario total de alimentacion: %.2f |",cost_total=refugio.coste_diario_total());
-                    System.out.printf("|Peso medio de los animales:  %.2f |",pes_med=refugio.pesoMedio());
-                    System.out.printf("|-----------------------------|");
+                    float cost_total=refugio.coste_diario_total();
+                    float pes_med=refugio.pesoMedio();
+                    System.out.printf("\n|-----------------------------|");
+                    System.out.printf("\n|Coste diario total de alimentacion: %.2f |",cost_total);
+                    System.out.printf("\n|Peso medio de los animales:  %.2f |",pes_med);
+                    System.out.printf("\n|-----------------------------|");
                     
                 break;
             case 5:
