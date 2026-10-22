@@ -44,7 +44,7 @@ public class Menu {
                         }
                         System.out.print("\nIntroduce el número de animales ha añadir: ");
                         refugio.setNum_animals(sc.nextInt());
-                        
+                        sc.nextLine(); //para el buffer
                         rep++;
                     }while(refugio.getNum_animals() > refugio.TAM || refugio.getNum_animals() <= 0);
 
@@ -60,12 +60,13 @@ public class Menu {
                         if(rep !=0){
                             flag=true;
                         }
-                        if(!flag){
+                        if(flag==true){
                             System.out.println("Error: Has introducido un precio no valido (mayor que 0)");
                             flag = false;
                         }
                         System.out.print("\nIntroduce el precio del alimento:");
                         refugio.setPrice_alimentoKg(sc.nextFloat());
+                        sc.nextLine();
                         rep++;
                     }while (refugio.getPrice_alimentoKg() <=0);
                         
@@ -73,47 +74,55 @@ public class Menu {
 
                 break;
             case 3:
-                    flag=false;
-                    rep=0;
+                    //limpiamos el buffer 
+                    sc.nextLine();
+                    System.out.printf("\nEl número de animales a introducir en el refugio son %d", refugio.getNum_animals());
 
-                    System.out.printf("\nEl número de animales ha introducir en el refugio son %d", refugio.getNum_animals());
-
-                    if(refugio.getNum_animals() <refugio.getAnimales().length){
+                    for(int i = 0; i < refugio.getNum_animals(); i++){
+                        flag = false;
+                        rep = 0;
                         
-                        System.out.println("|===========================|");
+                        System.out.println("\n|===========================|");
                         System.out.println("|   RELLENA EL FORMULARIO   |");
-                        System.out.println("|===========================|");
+                        System.out.println("|===========================|\n");
+                        
                         String nombre_cuidador;
                         do{
-                            if(rep !=0){
-                                flag =true;
+                            if(rep != 0){
+                                flag = true;
                             }
-                            if(flag ==true){
-                                System.out.print("\nError: El cuidador no exsite");
-                                flag =false;
+                            if(flag == true){
+                                System.out.print("\nError: El cuidador no existe");
+                                flag = false;
                             }
                             System.out.print("\nNombre del cuidador: ");
                             nombre_cuidador = sc.nextLine();
                             rep++;
-                        }while(nombre_cuidador.equalsIgnoreCase(cuidador1.getCuidador()) || nombre_cuidador.equalsIgnoreCase(cuidador2.getCuidador()));
+                        } while(!nombre_cuidador.equalsIgnoreCase(cuidador1.getCuidador()) && !nombre_cuidador.equalsIgnoreCase(cuidador2.getCuidador()));
 
                         System.out.print("\nNombre del animal: ");
                         String nombre_animal = sc.nextLine();
+                        
                         System.out.print("\nNombre de la especie: ");
                         String especie = sc.nextLine();
-                        System.out.print("\nPeso del animal(Kg):");
-                        Float peso_Anml = sc.nextFloat();
-                        System.out.print("\nConsumo diario del animal(Kg):");
-                        Float consumo_Anml = sc.nextFloat();
-                        Animal nuevoAnimal = new Animal(nombre_cuidador,nombre_animal,especie,peso_Anml,consumo_Anml);
                         
-                        //Vamos ha almacenar toda la informacion obtenida en el ArrayList
-                        int pos =refugio.getNum_animals();
-                        refugio.getAnimales()[pos]=nuevoAnimal;
+                        System.out.print("\nPeso del animal (Kg): ");
+                        float peso_Anml = sc.nextFloat();
+                        
+                        System.out.print("\nConsumo diario del animal (Kg): ");
+                        float consumo_Anml = sc.nextFloat();
+                        
+                        // ¡IMPORTANTE! Limpiamos el búfer aquí para que no falle en el siguiente animal
+                        sc.nextLine(); 
+
+                        Animal nuevoAnimal = new Animal(nombre_cuidador, nombre_animal, especie, peso_Anml, consumo_Anml);
+                        
+                        // Almacenar en la posición correspondiente
+                        refugio.getAnimales()[i] = nuevoAnimal;
                     }
-                    else{
-                        System.out.println("Refugio lleno");
-                    }
+
+                    System.out.println("\nRefugio lleno");
+                    
                 break;
             case 4:
                     //resultado de las funciones
