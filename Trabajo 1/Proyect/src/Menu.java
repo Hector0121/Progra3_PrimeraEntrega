@@ -13,7 +13,6 @@ public class Menu {
 
        int opcion;
        //Control de entrada de datos
-
        boolean flag = false;
        int rep=0;
 
@@ -87,6 +86,11 @@ public class Menu {
                         System.out.println("|===========================|\n");
                         
                         String nombre_cuidador;
+                        String nombre_animal;
+                        String especie;
+                        float peso_Anml;
+                        float consumo_Anml;
+
                         do{
                             if(rep != 0){
                                 flag = true;
@@ -99,20 +103,45 @@ public class Menu {
                             nombre_cuidador = sc.nextLine();
                             rep++;
                         } while(!nombre_cuidador.equalsIgnoreCase(cuidador1.getCuidador()) && !nombre_cuidador.equalsIgnoreCase(cuidador2.getCuidador()));
-
+                        
+                        // No voy a aplicar robusted aqui pq el nombre del animal puede ser incluso un numero
                         System.out.print("\nNombre del animal: ");
-                        String nombre_animal = sc.nextLine();
-                        
+                        nombre_animal = sc.nextLine();
+                        // No voy a aplicar robusted aqui pq tedria q comparar el nombre 
+                        // con  una lista muy grade de especies de animales
                         System.out.print("\nNombre de la especie: ");
-                        String especie = sc.nextLine();
+                        especie = sc.nextLine();
+
+                        //Aplicamos robusted al codigo en la lectura de peso y consumo
+                        flag =false;
+                        rep=0;
+                        do{
+                            if(rep !=0){
+                                flag=true;
+                            }
+                            if(flag ==true){
+                                System.out.println("Error: No puede introducir pesos negativos o ceros");
+                                flag=false;
+                            }
+                            System.out.print("\nPeso del animal (Kg): ");
+                            peso_Anml = sc.nextFloat();
+                        }while(peso_Anml <= 0);
+                        flag =false;
+                        rep=0;
+                        do{
+                            if(rep !=0){
+                                flag=true;
+                            }
+                            if(flag ==true){
+                                System.out.println("Error: No puede introducir consumos negativos o ceros");
+                                flag=false;
+                            }
+                            System.out.print("\nConsumo diario del animal (Kg): ");
+                            consumo_Anml = sc.nextFloat();
+                        }while(peso_Anml <= 0);
+                            
                         
-                        System.out.print("\nPeso del animal (Kg): ");
-                        float peso_Anml = sc.nextFloat();
-                        
-                        System.out.print("\nConsumo diario del animal (Kg): ");
-                        float consumo_Anml = sc.nextFloat();
-                        
-                        // ¡IMPORTANTE! Limpiamos el búfer aquí para que no falle en el siguiente animal
+                        //Limpiamos el buffer
                         sc.nextLine(); 
 
                         Animal nuevoAnimal = new Animal(nombre_cuidador, nombre_animal, especie, peso_Anml, consumo_Anml);
@@ -179,7 +208,7 @@ public class Menu {
         }
 
         }while(opcion !=5);
-        System.out.println("Prgrama finalizado");
+        System.out.println("Programa finalizado");
         sc.close();
     }
     
