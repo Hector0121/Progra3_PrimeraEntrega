@@ -18,7 +18,7 @@ public class Menu {
        int rep=0;
 
         do{
-        System.out.println("|=============================================|");
+        System.out.println("\n|=============================================|");
         System.out.println("| GESTION DEL REFUGIO                         |");
         System.out.println("|=============================================|");
         System.out.println("| 1)Crea un nuevo registro de animales        |");
@@ -126,35 +126,36 @@ public class Menu {
                 break;
             case 4:
                     //resultado de las funciones
-                    System.out.printf("|-----------------------------|");
-                    System.out.printf("| ANIMALES DEL REFUGIO|");
-                    System.out.printf("|-----------------------------|");
-                    System.out.printf("| Nombre | Especie | Cuidador | Formacion | Peso(Kg) | Consumo Kg | Coste EUR | ");
-                    for(int i=0;i<refugio.getNum_animals();i++){
+                    System.out.println("|---------------------------------------------------------------------------------------------------------|");
+                    System.out.println("| ANIMALES DEL REFUGIO                                                                                    |");
+                    System.out.println("|---------------------------------------------------------------------------------------------------------|");
+                    System.out.println("| Nombre     | Especie   | Cuidador                 | Formación | Peso (kg)  | Consumo kg | Coste EUR     |");
+                    System.out.println("|---------------------------------------------------------------------------------------------------------|");
+
+                    for(int i=0; i<refugio.getNum_animals(); i++){
                         Animal animalActual = refugio.getAnimales()[i];
                         String apellidos;
                         String formacion;
                         float coste_diario_anml;
-                        coste_diario_anml=refugio.coste_diario_x_animal(i);
+                        coste_diario_anml = refugio.coste_diario_x_animal(i);
+                        
                         if(animalActual.getNomb_cuidador().equals(cuidador1.getCuidador())){
-                            apellidos=cuidador1.getApellidos();
+                            apellidos = cuidador1.getApellidos();
                             if(cuidador1.isFormacion() == true){
-                                formacion="SI";
+                                formacion = "Sí";
+                            } else {
+                                formacion = "No";
                             }
-                            else{
-                                formacion ="NO";
-                            }
-                        }
-                        else{
-                            apellidos=cuidador2.getApellidos();
+                        } else {
+                            apellidos = cuidador2.getApellidos();
                             if(cuidador2.isFormacion() == true){
-                                formacion="SI";
-                            }
-                            else{
-                                formacion ="NO";
+                                formacion = "Sí";
+                            } else {
+                                formacion = "No";
                             }
                         }
-                        System.out.printf("| %-6s | %-7s | %-15s | %-9s | %-8.2f | %-11.2f | %-10.2f |\n",
+                        
+                        System.out.printf("| %-10s | %-9s | %-24s | %-11s | %-10.2f | %-10.2f | %-10.2f  |\n",
                             animalActual.getNomb_animal(),
                             animalActual.getEspecie(),
                             animalActual.getNomb_cuidador() + " " + apellidos,
@@ -163,13 +164,14 @@ public class Menu {
                             animalActual.getConsumoKg(),
                             coste_diario_anml);
                     }
-                    float cost_total=refugio.coste_diario_total();
-                    float pes_med=refugio.pesoMedio();
-                    System.out.printf("\n|-----------------------------|");
-                    System.out.printf("\n|Coste diario total de alimentacion: %.2f |",cost_total);
-                    System.out.printf("\n|Peso medio de los animales:  %.2f |",pes_med);
-                    System.out.printf("\n|-----------------------------|");
-                    
+
+                    float cost_total = refugio.coste_diario_total();
+                    float pes_med = refugio.pesoMedio();
+
+                    System.out.println("|---------------------------------------------------------------------------------------------------------|");
+                    System.out.printf("| Coste diario total de alimentación: %.2f EUR                                                            |\n", cost_total);
+                    System.out.printf("| Peso medio de los animales:  %.2f kg                                                                   |\n", pes_med);
+                    System.out.println("|---------------------------------------------------------------------------------------------------------|");
                 break;
             case 5:
 
