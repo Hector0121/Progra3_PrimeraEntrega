@@ -13,6 +13,7 @@ public class Menu {
 
        int opcion;
        //Control de entrada de datos
+
        boolean flag = false;
        int rep=0;
 
@@ -73,6 +74,10 @@ public class Menu {
 
                 break;
             case 3:
+                    if(refugio.getNum_animals()==0){
+                            System.out.println("Error:No has credo ningun refugio.");
+                            return;
+                    }
                     //limpiamos el buffer 
                     sc.nextLine();
                     System.out.printf("\nEl número de animales a introducir en el refugio son %d", refugio.getNum_animals());
@@ -154,6 +159,10 @@ public class Menu {
                     
                 break;
             case 4:
+                    if(refugio.getNum_animals()==0){
+                        System.out.println("Error:No has creado ningun refugio, no se uede imprimir nada por pantalla.");
+                        return ;
+                    }
                     //resultado de las funciones
                     System.out.println("|---------------------------------------------------------------------------------------------------------|");
                     System.out.println("| ANIMALES DEL REFUGIO                                                                                    |");
@@ -170,7 +179,7 @@ public class Menu {
                         
                         if(animalActual.getNomb_cuidador().equals(cuidador1.getCuidador())){
                             apellidos = cuidador1.getApellidos();
-                            if(cuidador1.isFormacion() == true){
+                            if(cuidador1.isFormacion() == true){//para no imprimir True o false 
                                 formacion = "Sí";
                             } else {
                                 formacion = "No";
